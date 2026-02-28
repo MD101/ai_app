@@ -1,5 +1,9 @@
+import os
 from config import Config
 import yaml
+
+BASE_DIR = os.path.dirname(__file__)
+path = os.path.join(BASE_DIR, "prompt.yaml")
 
 class Prompt:
     def __init__(self, config: Config, hidden: int = 0):
@@ -23,6 +27,6 @@ class Prompt:
     
     def load_system_prompt(self, hidden:int) -> str:
         # Load the system prompt from a file or environment variable
-        with open("prompt.yaml", "r") as file:
+        with open(path, "r") as file:
             data = yaml.safe_load(file)
             return data.get(f"system{hidden}", "You are a helpful assistant.")

@@ -7,7 +7,7 @@ config = Config()
 instructions = "After the question, Provide additional instructions for the AI model (optional):\n\
 Start with 'Additional Message:' followed by your instructions.\nYou can add multiple instructions by separating them with a new line.\n\
 If you don't have any additional instructions, do nothing.\n"
-def main():
+def main() -> None:
     print("Welcome to the AI App!")
     user_input = questionary.text(f"Please enter your input:\n{instructions}",multiline=True).ask()
     print(f"You entered: {user_input}")
@@ -25,7 +25,7 @@ def main():
         user_input = user_input.strip()
 
     llm_client = LLMClient(config)
-    response = llm_client.new_generate_response(user_input, additional_messages)
+    response = llm_client.new_generate_response(user_input, additional_messages, raw_output=True, inspect_it=True)
     print(f"AI Response: {response}")
 
     
